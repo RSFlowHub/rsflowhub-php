@@ -1,0 +1,26 @@
+name: Release
+
+# Push a tag like v1.2.0 to create the GitHub Release. Packagist picks the tag
+# up by itself (GitHub hook), so `composer require` gets the new version.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag must match RSFlowHub::VERSION
+        run: |
+          VERSION=$(grep -oP "VERSION = '\K[^']+" src/RSFlowHub.php)
+          if [ "v$VERSION" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match RSFlowHub::VERSION $VERSION"; exit 1
+          fi
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
