@@ -1,0 +1,35 @@
+name: Sync with API
+
+# Regenerates the typed layer (src/Generated, src/Resources, docs/ENDPOINTS.md)
+# from the live OpenAPI document and opens a pull request when the API changed.
+# The SDK already works with new endpoints without this; it adds autocomplete and docs.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+      - run: php bin/generate.php https://rsflowhub.com/api/v1/openapi.json
+      - run: composer update --no-interaction --no-progress --prefer-dist && vendor/bin/phpunit
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/sync-api
+          commit-message: 'chore: sync with the RSFlowHub API'
+          title: 'chore: sync with the RSFlowHub API'
+          body: |
+            Regenerated from https://rsflowhub.com/api/v1/openapi.json by the weekly "Sync with API" workflow.
+            Review the method changes in `docs/ENDPOINTS.md`, merge, then tag a minor release.
+          delete-branch: true

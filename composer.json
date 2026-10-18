@@ -1,0 +1,68 @@
+{
+    "name": "rsflowhub/rsflowhub-php",
+    "description": "Official PHP SDK for the RSFlowHub AI API: sentiment analysis, translation, chat, PII redaction, review and ticket AI, knowledge bases (RAG) and chatbots. New APIs work without an SDK update.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "rsflowhub",
+        "ai",
+        "ai-api",
+        "sdk",
+        "sentiment-analysis",
+        "translation",
+        "chatbot",
+        "rag",
+        "knowledge-base",
+        "pii-redaction",
+        "laravel"
+    ],
+    "homepage": "https://rsflowhub.com/docs",
+    "support": {
+        "docs": "https://rsflowhub.com/docs",
+        "issues": "https://github.com/RSFlowHub/rsflowhub-php/issues",
+        "source": "https://github.com/RSFlowHub/rsflowhub-php"
+    },
+    "authors": [
+        {
+            "name": "RSFlowHub",
+            "homepage": "https://rsflowhub.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5 || ^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RSFlowHub\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RSFlowHub\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "generate": "php bin/generate.php"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RSFlowHub\\Laravel\\RSFlowHubServiceProvider"
+            ],
+            "aliases": {
+                "RSFlowHub": "RSFlowHub\\Laravel\\Facades\\RSFlowHub"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
