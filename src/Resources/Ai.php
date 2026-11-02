@@ -21,7 +21,7 @@ use RSFlowHub\Resource;
  * @method \RSFlowHub\Response emailWorkflow(array{email_content: string, subject?: string|null, allowed_actions?: list<string>, allowed_departments?: list<string>, workflow_first?: bool, custom_instructions?: string|null} $params) Email Workflow. POST /ai/email-workflow
  * @method \RSFlowHub\Response faqMatch(array{collection_id: int, query: string, min_confidence?: float, top_n?: int} $params) FAQ Matcher. POST /ai/faq-match
  * @method \RSFlowHub\Response grammarFix(array{text: string, tone?: string|null, dialect?: string|null, return_explanations?: bool} $params) Grammar Fix. POST /ai/grammar-fix
- * @method \RSFlowHub\Response imageGeneration(array{prompt: string, style?: string|null, size?: string|null, n?: int|null} $params) Image Generation. POST /ai/image-generation
+ * @method \RSFlowHub\Response imageGeneration(array{prompt: string, style?: string|null, size?: string|null, aspect_ratio?: string|null, n?: int|null} $params) Image Generation. POST /ai/image-generation
  * @method \RSFlowHub\Response intentDetection(array{text?: string|null, intent_types?: list<string>, intent_entities?: list<list<string>>, messages?: list<array<string, mixed>>, examples?: list<array<string, mixed>>, multi_intent?: bool, allow_fallback?: bool, min_confidence?: float} $params = []) Intent Detection. POST /ai/intent-detection
  * @method \RSFlowHub\Response jsonExtractor(array{text: string, schema?: array<string, mixed>|null, custom_instructions?: string|null, allow_large_text?: bool} $params) JSON Extractor. POST /ai/json-extractor
  * @method \RSFlowHub\Response piiRedaction(array{text: string, redact_types?: list<string>, redaction_style?: string, return_entities?: bool} $params) PII Redaction. POST /ai/pii-redaction
